@@ -265,3 +265,48 @@ export const GitShowInput = z
       .describe("Show specific file at that ref"),
   })
   .strict();
+
+export const FileWriteInput = z
+  .object({
+    file_path: z
+      .string()
+      .describe("Absolute path to the file to write"),
+    content: z
+      .string()
+      .describe("File content to write"),
+    create_dirs: z
+      .boolean()
+      .optional()
+      .default(true)
+      .describe("Create parent directories if they don't exist"),
+  })
+  .strict();
+
+export const FileReadInput = z
+  .object({
+    file_path: z
+      .string()
+      .describe("Absolute path to the file to read"),
+  })
+  .strict();
+
+export const FileListInput = z
+  .object({
+    dir_path: z
+      .string()
+      .describe("Absolute path to the directory to list"),
+    recursive: z
+      .boolean()
+      .optional()
+      .default(false)
+      .describe("Recursively list all files in subdirectories"),
+  })
+  .strict();
+
+export const FileDeleteInput = z
+  .object({
+    file_path: z
+      .string()
+      .describe("Absolute path to the file to delete"),
+  })
+  .strict();
