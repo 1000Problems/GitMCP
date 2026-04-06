@@ -14,11 +14,15 @@ import { registerCloneTool } from "./tools/clone.js";
 import { registerStashTool } from "./tools/stash.js";
 import { registerRemoteTool } from "./tools/remote.js";
 import { registerInitTool } from "./tools/init.js";
+import { registerFsWriteTool } from "./tools/fs-write.js";
+import { registerFsReadTool } from "./tools/fs-read.js";
+import { registerFsListTool } from "./tools/fs-list.js";
+import { registerFsStatTool } from "./tools/fs-stat.js";
 
 export function createServer(config: ServerConfig): McpServer {
   const server = new McpServer({
     name: "git-mcp-server",
-    version: "0.2.0",
+    version: "0.3.0",
   });
 
   registerStatusTool(server, config);
@@ -35,6 +39,10 @@ export function createServer(config: ServerConfig): McpServer {
   registerStashTool(server, config);
   registerRemoteTool(server, config);
   registerInitTool(server, config);
+  registerFsWriteTool(server, config);
+  registerFsReadTool(server, config);
+  registerFsListTool(server, config);
+  registerFsStatTool(server, config);
 
   return server;
 }
