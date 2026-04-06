@@ -14,10 +14,6 @@ import { registerCloneTool } from "./tools/clone.js";
 import { registerStashTool } from "./tools/stash.js";
 import { registerRemoteTool } from "./tools/remote.js";
 import { registerInitTool } from "./tools/init.js";
-import { registerFileWriteTool } from "./tools/file-write.js";
-import { registerFileReadTool } from "./tools/file-read.js";
-import { registerFileListTool } from "./tools/file-list.js";
-import { registerFileDeleteTool } from "./tools/file-delete.js";
 
 export function createServer(config: ServerConfig): McpServer {
   const server = new McpServer({
@@ -39,10 +35,6 @@ export function createServer(config: ServerConfig): McpServer {
   registerStashTool(server, config);
   registerRemoteTool(server, config);
   registerInitTool(server, config);
-  registerFileWriteTool(server, config);
-  registerFileReadTool(server, config);
-  registerFileListTool(server, config);
-  registerFileDeleteTool(server, config);
 
   return server;
 }
