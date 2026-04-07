@@ -2,6 +2,27 @@
 
 You are building **GitMCP**, a local MCP server that gives Claude native git access. Read `SPEC.md` in this directory before writing any code — it is the authoritative design document.
 
+## Before Implementing Any TASK
+
+1. **Read the full TASK spec** — understand scope, acceptance criteria, and the Do Not Change section.
+2. **Query LightRAG** for cross-project context before touching shared patterns:
+   ```bash
+   curl -X POST http://localhost:9621/query \
+     -H "Content-Type: application/json" \
+     -d '{"query": "architectural context for [feature being implemented]", "mode": "hybrid"}'
+   ```
+3. **Stay in scope.** Only modify files and components explicitly listed in the TASK spec. If you discover something that needs changing outside the spec, create a new VybePM task — do NOT fix it inline.
+4. **Verify before committing.** Run `npm run build && npm test`, confirm zero errors, and check that nothing outside the TASK scope changed with `git diff`.
+
+### Protected Areas (global — TASK specs may add more)
+
+These components are stable and must NOT be modified unless the TASK spec explicitly names them:
+
+- `src/security.ts` — path validation and sanitization. Security-critical, heavily tested.
+- `src/git-executor.ts` — safe execFile wrapper. The single point of git CLI access.
+- `src/index.ts` — CLI arg parsing and stdio transport setup.
+- All existing tool files in `src/tools/` — modify only the tool named in the TASK spec, leave others untouched.
+
 ## Step 0: Repository Setup (Do This First)
 
 Before writing any code, set up the git repository and push to GitHub:
