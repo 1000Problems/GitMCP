@@ -340,3 +340,35 @@ export const FsStatInput = z
   })
   .strict();
 
+export const LightragQueryInput = z
+  .object({
+    text: z
+      .string()
+      .min(1)
+      .describe("The question or query to send to LightRAG"),
+    mode: z
+      .enum(["naive", "local", "global", "hybrid"])
+      .default("hybrid")
+      .describe("Search mode. hybrid is best for most queries."),
+  })
+  .strict();
+
+export const LightragIndexInput = z
+  .object({
+    documents: z
+      .array(
+        z.object({
+          path: z.string().describe("Absolute path to the file to index"),
+          label: z
+            .string()
+            .optional()
+            .describe("Human-readable label for this document"),
+        })
+      )
+      .min(1)
+      .describe("List of documents to index into LightRAG"),
+  })
+  .strict();
+
+export const LightragStatusInput = z.object({}).strict();
+

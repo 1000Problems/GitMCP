@@ -18,11 +18,14 @@ import { registerFsWriteTool } from "./tools/fs-write.js";
 import { registerFsReadTool } from "./tools/fs-read.js";
 import { registerFsListTool } from "./tools/fs-list.js";
 import { registerFsStatTool } from "./tools/fs-stat.js";
+import { registerLightragQueryTool } from "./tools/lightrag-query.js";
+import { registerLightragIndexTool } from "./tools/lightrag-index.js";
+import { registerLightragStatusTool } from "./tools/lightrag-status.js";
 
 export function createServer(config: ServerConfig): McpServer {
   const server = new McpServer({
     name: "git-mcp-server",
-    version: "0.3.0",
+    version: "0.4.0",
   });
 
   registerStatusTool(server, config);
@@ -43,6 +46,9 @@ export function createServer(config: ServerConfig): McpServer {
   registerFsReadTool(server, config);
   registerFsListTool(server, config);
   registerFsStatTool(server, config);
+  registerLightragQueryTool(server, config);
+  registerLightragIndexTool(server, config);
+  registerLightragStatusTool(server, config);
 
   return server;
 }

@@ -11,6 +11,7 @@ function parseArgs(argv: string[]): ServerConfig {
   let allowedPaths: string[] = [];
   let defaultBranch = DEFAULT_BRANCH;
   let timeout = DEFAULT_TIMEOUT;
+  let lightragUrl: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -22,6 +23,7 @@ Options:
   --allowed-paths <paths>   Comma-separated list of absolute directory paths (required)
   --default-branch <name>   Default branch name for new repos (default: main)
   --timeout <ms>            Timeout for git commands in ms (default: 30000)
+  --lightrag-url <url>      LightRAG base URL (default: http://localhost:9621)
   --help, -h                Show this help message
 `);
       process.exit(0);
@@ -42,6 +44,9 @@ Options:
       if (!Number.isNaN(parsed) && parsed > 0) {
         timeout = parsed;
       }
+    } else if (arg === "--lightrag-url" && i + 1 < args.length) {
+      i++;
+      lightragUrl = args[i];
     }
   }
 
@@ -52,7 +57,7 @@ Options:
     process.exit(1);
   }
 
-  return { allowedPaths, defaultBranch, timeout };
+  return { allowedPaths, defaultBranch, timeout, lightragUrl };
 }
 
 async function main(): Promise<void> {
