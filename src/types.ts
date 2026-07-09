@@ -2,7 +2,6 @@ export interface ServerConfig {
   allowedPaths: string[];
   defaultBranch: string;
   timeout: number;
-  lightragUrl?: string;
 }
 
 export interface GitResult {
